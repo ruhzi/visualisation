@@ -4,10 +4,10 @@ import plotly.graph_objects as go
 import os
 
 def load_election_data():
-    # Read the CSV file
+    
     file_path = "31_Winning_Candidate_Analysis_Over_Total_Electors.csv"
     
-    # Check if file exists
+    
     if not os.path.exists(file_path):
         print(f"Error: File '{file_path}' not found!")
         print(f"Current working directory: {os.getcwd()}")
@@ -25,7 +25,7 @@ def create_visualization(df):
     if df is None:
         return
         
-    # List of percentage columns with custom colors
+    
     percentage_columns = [
         'Winner with <= 10%',
         'Winner with > 10% to <= 20%',
@@ -37,10 +37,10 @@ def create_visualization(df):
         'Winner with > 70%'
     ]
     
-    # Create a grouped bar chart with custom styling
+    
     fig = go.Figure()
     
-    # Custom color palette
+    
     colors = px.colors.qualitative.Set3
     
     for i, column in enumerate(percentage_columns):
@@ -57,7 +57,7 @@ def create_visualization(df):
                          "<extra></extra>"
         ))
 
-    # Update layout with improved styling
+    
     fig.update_layout(
         title={
             'text': 'Distribution of Winning Margins Across States/UTs (2024)',
@@ -71,8 +71,8 @@ def create_visualization(df):
         yaxis_title='<b>Number of Seats</b>',
         barmode='group',
         xaxis_tickangle=-45,
-        height=900,  # Increased height
-        width=1200,  # Set width
+        height=900,  
+        width=1200,  
         showlegend=True,
         legend_title='<b>Winning Margin</b>',
         legend={
@@ -87,7 +87,7 @@ def create_visualization(df):
         font=dict(family="Arial, sans-serif")
     )
     
-    # Add gridlines
+    
     fig.update_yaxes(
         gridcolor='rgba(0,0,0,0.1)',
         gridwidth=1,
@@ -95,7 +95,7 @@ def create_visualization(df):
         zerolinecolor='rgba(0,0,0,0.2)'
     )
     
-    # Add total seats as text annotation with improved styling
+    
     for i, state in enumerate(df['Name of State/UT']):
         total_seats = df.loc[df['Name of State/UT'] == state, 'No. Of Seats'].values[0]
         fig.add_annotation(
